@@ -1,15 +1,13 @@
 <template>
   <div>
-    <p>찾을 수 없는 페이지 입니다.</p>
+    <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: "404"
+  name: "dynamic",
 }
 </script>
-
-<style scoped>
-
+<style>
 </style>

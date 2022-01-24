@@ -1,23 +1,30 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/about">About</router-link>
-    <router-link to="/nav-methods">네비게이션 메소드</router-link>
-    <router-link to="/nav-guard">네비게이션 가드</router-link>
-    <router-link to="/my-page">My page</router-link>
-    <router-link class="menu"
-                 to="/redirect"
-                 @mouseenter.native="isHovering = true"
-                 @mouseleave.native="isHovering = false">
-      리다이렉트
-      <ul class="submenu" v-if="isHovering">
-        <li>
-          <router-link to="/redirect/submenu1">서브메뉴1</router-link>
-          <router-link to="/redirect/submenu1">서브메뉴2</router-link>
-        </li>
-      </ul>
-    </router-link>
-  </div>
+  <nav id="nav">
+    <ul>
+      <li><router-link to="/" exact>Home</router-link></li>
+      <li><router-link to="/code-splitting">코드 스플리팅</router-link></li>
+      <li><router-link to="/dynamic">동적라우팅</router-link></li>
+      <li><router-link to="/nav-methods">네비게이션 메소드</router-link></li>
+      <li>
+        <router-link to="/nav-guard">네비게이션 가드</router-link>
+      </li>
+      <li><router-link to="/my-page">My page</router-link></li>
+      <li>
+        <router-link class="menu"
+                        to="/redirect"
+                        @mouseenter.native="isHovering = true"
+                        @mouseleave.native="isHovering = false">리다이렉트
+          <ul class="submenu" v-if="isHovering">
+            <li>
+              <a @click.prevent="routerPush('/redirect/submenu1')">서브메뉴1</a>
+              <a @click.prevent="routerPush('/redirect/submenu2')">서브메뉴2</a>
+            </li>
+          </ul>
+      </router-link>
+      </li>
+      <li><router-link to="/scroll-behavior">scrollBehavior</router-link></li>
+    </ul>
+  </nav>
 </template>
 
 <script>
@@ -25,13 +32,16 @@ export default {
   name: "header-nav",
   data() {
     return {
-      isHovering: false
+      isHovering: false,
     }
   },
   methods: {
     showSub() {
       console.log(this.$refs.menu);
       this.$refs.menu.classList.add('show');
+    },
+    routerPush(path) {
+      this.$router.push(path).catch(()=>{});
     }
   },
 }
@@ -46,17 +56,33 @@ a {
   position: fixed;
   left: 0;
   top: 0;
-  padding: 30px 0 0 30px;
-  width: 20%;
   text-align: left;
+  padding: 30px 0 0 30px;
+  width: 22%;
+  box-sizing: border-box;
 }
-.menu {
-  position: relative;
+#nav ul{
+  padding: 0;
+}
+#nav ul li a {
+  padding: 5px 10px;
+  font-size: 15px;
+  box-sizing: border-box;
 }
 .menu .submenu {
-  background: burlywood;
+  padding: 0;
+}
+.menu .submenu a{
   line-height: 35px;
   font-size: 12px;
+  z-index: 1;
+}
+a.router-link-active {
+  color: #fff;
+  font-weight: 700;
+  background-color: #3b4452;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
 </style>

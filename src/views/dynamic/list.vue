@@ -1,10 +1,10 @@
 <template>
-  <div class="about">
+  <div class="dynamic">
     <div class="a-wrap">
       <ul>
         <li v-for="(item, idx) in items" :key="idx">
           <span>{{item.id}}</span>
-          <router-link :to="`/about/${item.id}`">{{item.title}}</router-link>
+          <router-link :to="`/dynamic/${item.id}`">{{item.title}}</router-link>
         </li>
       </ul>
     </div>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "about-list",
+  name: "dynamic-list",
   data() {
     return {
       items: [
@@ -43,6 +43,7 @@ export default {
 li {
   display: flex;
   border: 1px solid #000;
+  padding: 5px;
 }
 li span {
   display: block;
@@ -53,7 +54,8 @@ li span {
 li a {
   display: block;
   margin-left: 5px;
-  font-size: 15px;
+  font-size: 14px;
+  text-decoration: underline;
 }
 
 </style>

@@ -1,16 +1,20 @@
 <template>
   <div class="home">
-    <h1>INDEX</h1>
-    <ul>
+    <h2>INDEX</h2>
+    <ul class="ul">
       <li>1. 라우트 메타 필드</li>
-      <li>2. 동적 라우트 매칭</li>
-      <li>3. 라우터 네비게이션 메서드</li>
-      <li>4. 라우터 네비게이션 가드</li>
-      <li>5. 리다이렉트 </li>
-      <li>6. scrollBehavior </li>
+      <li>2. 코드 스플리팅</li>
+      <li>3. 동적 라우트 매칭</li>
+      <li>4. 라우터 네비게이션 메서드</li>
+      <li>
+        5. 라우터 네비게이션 가드<br/>
+        <p>- Vue Router의 라이프사이클 훅</p>
+      </li>
+      <li>6. 리다이렉트 </li>
+      <li>7. scrollBehavior </li>
     </ul>
-    <div style="width: 100%">
-      <button class="push" @click="goBack">go Back</button>
+    <div>
+      scrollPosition x, y 값 기억하기
     </div>
   </div>
 </template>
@@ -27,15 +31,18 @@ export default {
 </script>
 
 <style scoped>
+.ul {
+  margin-bottom: 500px;
+}
 .home {
   height: 2000px;
 }
-div {
-  background: cornflowerblue;
-}
-h1 {
-  font-size: 25px;
+
+h2 {
+  font-size: 20px;
+  text-align: left;
   width: 100%;
+  padding-left: 40px;
   margin: 0;
 }
 ul {
@@ -44,5 +51,10 @@ ul {
 ul li {
   font-size: 20px;
   text-align: left;
+  margin-top: 15px;
+}
+ul li p {
+  margin: 0;
+  font-size: 15px;
 }
 </style>

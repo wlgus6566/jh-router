@@ -2,19 +2,21 @@
   <div class="btn-wrap">
     <div>
         1. push :
-        <button class="push" @click="push">push to about</button>
-        <router-link to="/about">router link to about</router-link>
+        <button class="push" @click="push">push to dynamic</button>
+        <router-link class="btn-a" to="/dynamic">router link to dynamic</router-link>
         <div>- push with Query :
-        <button
-            class="page"
-            v-for="(number, idx) in numList" :key="idx"
-            @click="pushWithQuery(number)"
-        >{{number}}</button>
+        <div>
+          <button
+              class="page"
+              v-for="(pageNum, idx) in pageInfo.pageList" :key="idx"
+              @click="pushWithQuery(pageNum)"
+          >{{pageNum}}</button>
+        </div>
         </div>
     </div>
     <div>
       2. replace :
-      <button class="replace" @click="replace">replace about</button>
+      <button class="replace" @click="replace">replace dynamic</button>
     </div>
     <div>
       3. go:
@@ -35,25 +37,31 @@ export default {
   name: "nav-methods",
   data() {
     return {
-      numList: [1,2,3]
+      pageInfo: {
+        pageList: [1,2,3,4,5],
+        size: '3',
+      }
     }
   },
   methods: {
     // push: <router-link :to="..."> 와 같음
     push() {
       // string 전달
-      this.$router.push('/about');
+      this.$router.push('/dynamic')
       // object 전달
-      // this.$router.push({name: 'nav-methods'});
-      // this.$router.push({path: '/about'})
+      // this.$router.push({name: ''})
+      // this.$router.push({path: ''})
     },
     pushWithQuery(pageNum) { // query와 함께 전달
-      this.$router.push({ path: '/nav-methods', query: { page: pageNum, size: '3' } }).catch(()=>{});
+      this.$router
+          .push({ path: '/nav-methods', query: { page: pageNum, size: this.pageInfo.size } })
+          .catch(()=>{});
       //nav-methods?page=1
       //라우터 리다이렉션 오류 - catch로 오류를 무시하기
+
     },
     replace() {
-      this.$router.replace('/about')
+      this.$router.replace('/dynamic')
       //이름에 나타나듯이 현재 페이지가 다른 페이지로 대체되는 것입니다.
       //히스토리에 현재 페이지를 저장하지 않고 이동합니다.
       //그래서 히스토리에 경로가 남지 않으므로 뒤로가기 눌렀을 때 원래 페이지로 돌아올 수 없습니다.
@@ -66,29 +74,41 @@ export default {
       this.$router.go(1)
     },
   },
+  // 컴포넌트 가드
 /*  beforeRouteEnter (to, from, next) {
-    console.log('beforeRouteEnter');
+    console.log('beforeRouteEnter: 컴포넌트로 들어오기 전에 수행');
     next()
-    // nav-methods 컴포넌트가 화면에 표시되기 전에 수행될 로직
-    // nav-methods 컴포넌트는 아직 생성되지 않은 시점 -`this`로 bout-list 컴포넌트를 접근할 수 없음
+    // 컴포넌트가 화면에 표시되기 전에 수행될 로직
+    // 컴포넌트는 아직 생성되지 않은 시점 -`this`로 컴포넌트를 접근할 수 없음
   },
   beforeRouteUpdate (to, from, next) {
-    console.log('beforeRouteUpdate');
+    console.log('beforeRouteUpdate: 컴포넌트를 재사용 할 경우에만 발생하는 훅');
     next()
-    // 화면에 표시된 컴포넌트가 변경될 때 수행될 로직
-    // `this`로 nav-methods컴포넌트를 접근할 수 있음
+    // 컴포넌트를 재사용 할 경우에만 발생하는 훅
+    // 예를 들어 게시판의 첫 번째 페이지 "/board/page/1"에서 다음 글 목록을 불러오기 위해 /board/page/2"로 게시판의 페이지를 이동할 때
   },
   beforeRouteLeave (to, from, next) {
-    console.log('beforeRouteLeave');
-    next()
-    // url 값이 변경되기 직전의 로직
-    // `this`로 nav-methods 컴포넌트를 접근할 수 있음
-    //next()
+    // 기존에 존재하던 컴포넌트가 제거되기 전에 호출되는 훅
+    // 이 훅은 주로 게시글 등을 저장하지 않은 상태로 다른 곳으로 이동하는 것을 방지하는 데 사용됌.
+    const answer = window.confirm('저장되지 않은 작업이 있습니다! 정말 나갈까요?');
+    if (answer) {
+      next();
+    } else {
+      next(false);
+    }
   }*/
 }
 </script>
 
 <style scoped>
+.btn-a {
+  line-height: 30px;
+  padding: 0 10px;
+  font-size: 13px;
+  background: lightpink;
+  border-radius: 8px;
+  border: 1px solid #2c3e50;
+}
 .btn-wrap {
   text-align: left;
 }
@@ -102,7 +122,11 @@ export default {
    margin-left: 20px;
    line-height: 30px;
    padding: 0 10px;
-   background: darksalmon;
+   color: #fff;
+   background-color: #3b4452;
+   border-radius: 5px;
+   border: none;
+   outline: none;
  }
  .page {
    margin: 3px;

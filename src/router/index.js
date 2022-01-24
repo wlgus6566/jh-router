@@ -1,5 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+/*import Home from '@/views/home';
+import Dynamic from '@/views/dynamic';
+import dynamicList from '@/views/dynamic/list';
+import dynamicView from '@/views/dynamic/view';
+import NavMethods from '@/views/nav-methods';
+import NavGuard from '@/views/nav-guard';
+import Redirect from '@/views/redirect';
+import RedirectSubmenu1 from '@/views/redirect/submenu1';
+import RedirectSubmenu2 from '@/views/redirect/submenu2';
+import MyPage from '@/views/my-page';
+import ScrollBehavior from '@/views/scroll-behavior';
+import Error from '@/views/error-404';
+import Login from '@/views/login';*/
 
 Vue.use(VueRouter)
 //뷰 라우터를 설치하고 나면 아래 코드와 같이 라우터 인스턴스를 하나 생성
@@ -10,42 +23,52 @@ const router = new VueRouter({
             path: '/',
             name: "home",
             component: () => import('@/views/home.vue'),
+            //component: Home,
             meta: {
                 title: 'HOME',
                 layout: 'layout1',
-                //scrollTo300: true
-            }
+                scrollTo: 300
+            },
         },
         {
-            path: '/about',
-            name: "about",
-            component: () => import('@/views/about'),
+            path: '/code-splitting',
+            name: "home",
+            component: () => import('@/views/code-splitting.vue'),
+            //component: codeSplitting,
             meta: {
-                title: 'ABOUT',
+                title: '코드 스플리팅',
+                layout: 'layout1',
+            },
+        },
+        {
+            path: '/dynamic',
+            component: () => import('@/views/dynamic'),
+            //component: Dynamic,
+            meta: {
+                title: '동적라우팅',
                 layout: 'layout2'
             },
             children: [
                 {
                     path: '/',
-                    name: "about-list",
-                    component: () => import('@/views/about/list'),
+                    name: "dynamic-list",
+                    component: () => import('@/views/dynamic/list'),
+                    //component: dynamicList,
                     meta: {
-                        title: 'ABOUT 리스트',
+                        title: 'dynamic 리스트',
                     }
                 },
                 {
+                    // 동적 라우트 매칭
                     path: ':id',
-                    name: "about-view",
-                    component: () => import('@/views/about/view'),
+                    name: "dynamic-view",
+                    component: () => import('@/views/dynamic/view'),
+                    //component: dynamicView,
                     meta: {
-                        title: 'ABOUT 상세페이지',
+                        title: 'dynamic 상세페이지',
                     },
-/*                    beforeEnter(to, from, next) {
-                        if (isNaN(to.params.id)) {
-                            next("404");
-                        } else {
-                            next();
-                        }
+       /*             beforeEnter(to, from, next) {
+
                     },*/
                 },
             ]
@@ -54,6 +77,7 @@ const router = new VueRouter({
             path: '/nav-methods',
             name: "nav-methods",
             component: () => import('@/views/nav-methods.vue'),
+            //component: NavMethods,
             meta: {
                 title: '라우터 네비게이션 메서드',
                 layout: 'layout2'
@@ -63,6 +87,7 @@ const router = new VueRouter({
             path: '/nav-guard',
             name: "nav-guard",
             component: () => import('@/views/nav-guard.vue'),
+            //component: NavGuard,
             meta: {
                 title: '라우터 네비게이션 가드',
                 layout: 'layout2'
@@ -72,15 +97,17 @@ const router = new VueRouter({
             path: '/my-page',
             name: "my-page",
             component: () => import('@/views/my-page.vue'),
+            //component: MyPage,
             meta: {
                 title: '마이페이지',
-                authRequired: true // meta 정보에 authRequired라는 Boolean 값 추가
+                //authRequired: true
             }
         },
         {
             path: '/login',
             name: "login",
                 component: () => import('@/views/login.vue'),
+                //component: Login,
                 meta: {
                 title: '로그인페이지',
             }
@@ -89,44 +116,75 @@ const router = new VueRouter({
             path: '/redirect',
             name: "redirect",
             component: () => import('@/views/redirect'),
+            //component: Redirect,
             meta: {
                 title: '리다이렉트',
             },
-            redirect: '/redirect/submenu1',
+            //redirect: '/redirect/submenu1',
             children: [
                 {
                     path: 'submenu1',
                     name: "submenu1",
                     component: () => import('@/views/redirect/submenu1.vue'),
+                    //component: RedirectSubmenu1,
                     meta: {
                         title: '리다이렉트 - 서브메뉴1',
+                    },
+                },
+                {
+                    path: 'submenu2',
+                    name: "submenu2",
+                    component: () => import('@/views/redirect/submenu2.vue'),
+                    //component: RedirectSubmenu2,
+                    meta: {
+                        title: '리다이렉트 - 서브메뉴2',
                     },
                 }
             ],
         },
         {
+            path: '/scroll-behavior',
+            name: "scroll-behavior",
+            component: () => import('@/views/scroll-behavior.vue'),
+            //component: ScrollBehavior,
+            meta: {
+                title: 'Scroll Behavior',
+            }
+        },
+        {
             path: '*',
-            name: "404",
-            component: () => import('@/views/404.vue'),
+            name: "error-404",
+            component: () => import('@/views/error-404.vue'),
+            //component: Error,
             meta: {
                 title: '404',
             }
         },
     ],
     // 컨텐츠 항목의 스크롤 위치를 유지할 수 있음
-    scrollBehavior (to, from, savedPosition) {
+/*    scrollBehavior (to, from, savedPosition) {
+        console.log(savedPosition) // 이전에 컴포넌트에 위치했었던 스크롤 위치 객체를 반환
+
         if (savedPosition) { // savedPosition은 히스토리 모드(뒤로가기, 앞으로가기)에서만 작동
-            console.log(savedPosition)// 스크롤 위치 객체를 반환
+            console.log(savedPosition)
             return savedPosition
-        } else {
-            return { x: 0, y: 0 };
         }
 
         // 사용자 정의
-/*        if (to.matched.some(m => m.meta.scrollTo300)) {
-            return{ x: 0, y: 300 }
-        }*/
-    }
+        /!*       if (to.meta.scrollTo) {
+                   return{ x: 0, y: to.meta.scrollTo }
+               }*!/
+
+        // scrollBehavior에서 hash가 있는 지 확인후 있다면 그 위치로 이동시킨다.
+        /!*        if (to.hash) {
+                    return {
+                        selector: to.hash,
+                        //behavior: 'smooth'
+                        //offset: { y: 200 }
+                    };
+                }*!/
+        return {x: 0, y: 0};
+    }*/
 })
 
 // ** 전역가드
@@ -134,15 +192,13 @@ const router = new VueRouter({
 // to : 이동할 url 정보가 담긴 라우터 객체
 // from : 현재 url 정보가 담긴 라우터 객체
 // next : to에서 지정한 url로 이동하기 위해 꼭 호출해야 하는 함수
-router.beforeEach(function ( to, from,next) {
-    //console.log("to: ",to)
-    //console.log(to.matched[0].meta === to.meta)
+router.beforeEach( (to, from, next) => {
     if(to.meta.authRequired) {
-        alert('로그인을 진행하세요.')
+        alert('로그인이 필요합니다.')
         next('/login')
     } else {
         next();
     }
-});
+})
 
 export default router

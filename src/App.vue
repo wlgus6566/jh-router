@@ -8,19 +8,19 @@
 <script>
 
 import HeaderNav from "@/components/header-nav";
-import layout2 from "@/layout/layout1";
-import layout1 from "@/layout/layout2";
+import layout1 from "@/layout/layout1";
+import layout2 from "@/layout/layout2";
 export default {
   name: 'App',
   components: {
-    layout2,
     layout1,
+    layout2,
     HeaderNav
   },
   computed: {
     layoutType() {
-      const layout = this.$route.meta.layout;
-      return layout ? layout : 'layout1'
+      const layoutT = this.$route.meta.layout;
+      return layoutT ? layoutT : 'layout1'
     }
   },
 }
@@ -33,23 +33,43 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
+  overflow-x: hidden;
 }
-
+h3 {
+  text-align: left;
+  font-size: 20px;
+}
 li {
   list-style: none;
+  text-align: left;
+}
+h1 {
+  background: #eee;
+  padding: 20px;
+  font-size: 28px;
 }
 .view {
   flex: 1;
-  height: 200px;
-  width: 80%;
-  max-width: 80%;
+  padding: 0 30px 30px;
+  box-sizing: border-box;
+  max-width: 75%;
 }
 .view > div{
-  font-size: 35px;
-  padding: 30px;
   box-sizing: border-box;
+}
+a {text-decoration: none; outline: none; color: #000;}
+a:hover, a:active {text-decoration: none; color: #000;}
+a:active {
+  color: blue;
+}
+button {
+  cursor: pointer;
+}
+
+p {
+  font-size: 16px;
+  text-align: left;
 }
 </style>
