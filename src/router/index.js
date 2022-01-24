@@ -162,29 +162,29 @@ const router = new VueRouter({
         },
     ],
     // 컨텐츠 항목의 스크롤 위치를 유지할 수 있음
-/*    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior (to, from, savedPosition) {
         console.log(savedPosition) // 이전에 컴포넌트에 위치했었던 스크롤 위치 객체를 반환
 
-        if (savedPosition) { // savedPosition은 히스토리 모드(뒤로가기, 앞으로가기)에서만 작동
+/*        if (savedPosition) { // savedPosition은 히스토리 모드(뒤로가기, 앞으로가기)에서만 작동
             console.log(savedPosition)
             return savedPosition
-        }
+        }*/
 
         // 사용자 정의
-        /!*       if (to.meta.scrollTo) {
+        /*       if (to.meta.scrollTo) {
                    return{ x: 0, y: to.meta.scrollTo }
-               }*!/
+               }*/
 
         // scrollBehavior에서 hash가 있는 지 확인후 있다면 그 위치로 이동시킨다.
-        /!*        if (to.hash) {
+        /*        if (to.hash) {
                     return {
                         selector: to.hash,
                         //behavior: 'smooth'
                         //offset: { y: 200 }
                     };
-                }*!/
+                }*/
         return {x: 0, y: 0};
-    }*/
+    }
 })
 
 // ** 전역가드
