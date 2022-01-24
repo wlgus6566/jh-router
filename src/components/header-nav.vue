@@ -16,8 +16,8 @@
                         @mouseleave.native="isHovering = false">리다이렉트
           <ul class="submenu" v-if="isHovering">
             <li>
-              <a @click.prevent="routerPush('/redirect/submenu1')">서브메뉴1</a>
-              <a @click.prevent="routerPush('/redirect/submenu2')">서브메뉴2</a>
+              <a @click.prevent="routerPush('/redirect/submenu1')">서브1</a>
+              <a @click.prevent="routerPush('/redirect/submenu2')">서브2</a>
             </li>
           </ul>
       </router-link>
@@ -72,9 +72,10 @@ a {
 .menu .submenu {
   padding: 0;
 }
-.menu .submenu a{
+.menu .submenu li a{
   line-height: 35px;
-  font-size: 12px;
+  font-size: 10px;
+  padding: 0;
   z-index: 1;
 }
 a.router-link-active {

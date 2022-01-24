@@ -13,7 +13,9 @@
       </li>
       <li>
         <h3>3. 컴포넌트 가드</h3>
-        <p>- beforeRouteEnter, beforeRouteUpdate, beforeRouteLeave: 라우터로 지정된 특정 컴포넌트에 가드를 설정하는 방법</p>
+
+        <p>Vue Router의 라이프사이클 훅<br/>
+          - beforeRouteEnter, beforeRouteUpdate, beforeRouteLeave: 라우터로 지정된 특정 컴포넌트에 가드를 설정하는 방법</p>
       </li>
     </ul>
   </div>

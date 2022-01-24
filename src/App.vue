@@ -10,6 +10,7 @@
 import HeaderNav from "@/components/header-nav";
 import layout1 from "@/layout/layout1";
 import layout2 from "@/layout/layout2";
+
 export default {
   name: 'App',
   components: {
@@ -19,8 +20,8 @@ export default {
   },
   computed: {
     layoutType() {
-      const layoutT = this.$route.meta.layout;
-      return layoutT ? layoutT : 'layout1'
+      const metalayout = this.$route.meta.layout;
+      return metalayout ? metalayout : 'layout1'
     }
   },
 }
@@ -52,7 +53,6 @@ h1 {
 }
 .view {
   flex: 1;
-  padding: 0 30px 30px;
   box-sizing: border-box;
   max-width: 75%;
 }

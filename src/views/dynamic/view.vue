@@ -24,7 +24,7 @@ export default {
       items: [
         {
           id: 1,
-          title: '안녕하세요. 다이어트 고민이있습니다.',
+          title: '안녕하세요. 고민이있습니다.',
         },
         {
           id: 2,

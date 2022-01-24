@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <h2>INDEX</h2>
+    <h2>목차</h2>
     <ul class="ul">
-      <li>1. 라우트 메타 필드</li>
+      <li>1. 라우터 메타 필드</li>
       <li>2. 코드 스플리팅</li>
       <li>3. 동적 라우트 매칭</li>
       <li>4. 라우터 네비게이션 메서드</li>
@@ -11,11 +11,8 @@
         <p>- Vue Router의 라이프사이클 훅</p>
       </li>
       <li>6. 리다이렉트 </li>
-      <li>7. scrollBehavior </li>
+<!--      <li>7. scrollBehavior </li>-->
     </ul>
-    <div>
-      scrollPosition x, y 값 기억하기
-    </div>
   </div>
 </template>
 
@@ -49,7 +46,7 @@ ul {
   margin-top: 20px;
 }
 ul li {
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
   margin-top: 15px;
 }

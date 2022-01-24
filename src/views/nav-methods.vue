@@ -46,17 +46,19 @@ export default {
   methods: {
     // push: <router-link :to="..."> 와 같음
     push() {
-      // string 전달
-      this.$router.push('/dynamic')
       // object 전달
-      // this.$router.push({name: ''})
-      // this.$router.push({path: ''})
+      this.$router.push({path: '/dynamic'})
+      //this.$router.push({name: 'dynamic-list'})
+      // string 전달
+      //this.$router.push('/dynamic')
     },
     pushWithQuery(pageNum) { // query와 함께 전달
       this.$router
-          .push({ path: '/nav-methods', query: { page: pageNum, size: this.pageInfo.size } })
-          .catch(()=>{});
-      //nav-methods?page=1
+          .push({
+            path: '/nav-methods',
+            query: { page: pageNum, size: this.pageInfo.size }
+          })
+          //.catch(()=>{});
       //라우터 리다이렉션 오류 - catch로 오류를 무시하기
 
     },
@@ -75,28 +77,29 @@ export default {
     },
   },
   // 컴포넌트 가드
-/*  beforeRouteEnter (to, from, next) {
+ /* beforeRouteEnter (to, from, next) {
     console.log('beforeRouteEnter: 컴포넌트로 들어오기 전에 수행');
     next()
     // 컴포넌트가 화면에 표시되기 전에 수행될 로직
     // 컴포넌트는 아직 생성되지 않은 시점 -`this`로 컴포넌트를 접근할 수 없음
   },
-  beforeRouteUpdate (to, from, next) {
-    console.log('beforeRouteUpdate: 컴포넌트를 재사용 할 경우에만 발생하는 훅');
-    next()
-    // 컴포넌트를 재사용 할 경우에만 발생하는 훅
-    // 예를 들어 게시판의 첫 번째 페이지 "/board/page/1"에서 다음 글 목록을 불러오기 위해 /board/page/2"로 게시판의 페이지를 이동할 때
-  },
+
   beforeRouteLeave (to, from, next) {
-    // 기존에 존재하던 컴포넌트가 제거되기 전에 호출되는 훅
+    // 기존 컴포넌트에서 벗어나기 전에 호출되는 훅
     // 이 훅은 주로 게시글 등을 저장하지 않은 상태로 다른 곳으로 이동하는 것을 방지하는 데 사용됌.
-    const answer = window.confirm('저장되지 않은 작업이 있습니다! 정말 나갈까요?');
+/!*    const answer = window.confirm('저장되지 않은 작업이 있습니다! 정말 나갈까요?');
     if (answer) {
       next();
     } else {
       next(false);
-    }
-  }*/
+    }*!/
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('beforeRouteUpdate: 라우터가 업데이트 되어도 기존 컴포넌트에 머물러있을 경우 발생하는 훅');
+    next()
+    // 라우터가 업데이트 되어도 기존 컴포넌트에 머물러있을 경우 발생하는 훅
+    // 예를 들어 게시판의 첫 번째 페이지 "/board/page/1"에서 다음 글 목록을 불러오기 위해 /board/page/2"로 게시판의 페이지를 이동할 때
+  },*/
 }
 </script>
 

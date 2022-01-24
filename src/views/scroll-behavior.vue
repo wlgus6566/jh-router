@@ -1,10 +1,8 @@
 <template>
   <div>
-    <h3>소개</h3>
-    <p>클라이언트 측 라우팅을 사용할 때 새로운 경로로 이동할 때 맨 위로 스크롤하거나
-      실제 페이지를 다시 로드하는 것처럼 컨텐츠 항목의 스크롤 위치를 유지할 수 있습니다.
-      vue-router는 이러한 것들을 할 수 있으며, 라우트 탐색에서 스크롤 동작을 완전히
-      사용자 정의할 수 있게합니다.</p>
+    <h3>문제상황</h3>
+    <p>스크롤을 내린 상태에서 라우터를 통해 다른 페이지로 이동할 경우,
+      스크롤이 초기화되지 않고 내려가있는 상태로 옮겨간다 </p>
     <div id="scrollHere">
       #scrollHere 스크롤 여기로 이동
     </div>
@@ -14,9 +12,6 @@
 <script>
 export default {
   name: "scroll-behavior",
-  mounted() {
-    this.$router.push({name: 'scroll-behavior', hash: '#scrollHere'}).catch(()=>{});
-  }
 }
 </script>
 

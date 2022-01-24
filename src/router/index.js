@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 /*import Home from '@/views/home';
 import Dynamic from '@/views/dynamic';
+import CodeSplitting from '@/views/code-splitting';
 import dynamicList from '@/views/dynamic/list';
 import dynamicView from '@/views/dynamic/view';
 import NavMethods from '@/views/nav-methods';
@@ -15,7 +16,7 @@ import Error from '@/views/error-404';
 import Login from '@/views/login';*/
 
 Vue.use(VueRouter)
-//뷰 라우터를 설치하고 나면 아래 코드와 같이 라우터 인스턴스를 하나 생성
+
 const router = new VueRouter({
     mode: 'history',
     routes: [
@@ -32,12 +33,12 @@ const router = new VueRouter({
         },
         {
             path: '/code-splitting',
-            name: "home",
+            name: "code-splitting",
             component: () => import('@/views/code-splitting.vue'),
             //component: codeSplitting,
             meta: {
                 title: '코드 스플리팅',
-                layout: 'layout1',
+                layout: 'layout2',
             },
         },
         {
@@ -46,7 +47,6 @@ const router = new VueRouter({
             //component: Dynamic,
             meta: {
                 title: '동적라우팅',
-                layout: 'layout2'
             },
             children: [
                 {
@@ -67,8 +67,12 @@ const router = new VueRouter({
                     meta: {
                         title: 'dynamic 상세페이지',
                     },
-       /*             beforeEnter(to, from, next) {
-
+/*                    beforeEnter(to, from, next) {
+                        if(isNaN(to.params.id)) {
+                            next('/error-404')
+                        } else {
+                            next()
+                        }
                     },*/
                 },
             ]
@@ -79,7 +83,7 @@ const router = new VueRouter({
             component: () => import('@/views/nav-methods.vue'),
             //component: NavMethods,
             meta: {
-                title: '라우터 네비게이션 메서드',
+                title: '라우터 네비게이션 메소드',
                 layout: 'layout2'
             }
         },
@@ -100,7 +104,7 @@ const router = new VueRouter({
             //component: MyPage,
             meta: {
                 title: '마이페이지',
-                //authRequired: true
+                authRequired: true
             }
         },
         {
@@ -161,38 +165,35 @@ const router = new VueRouter({
             }
         },
     ],
-    // 컨텐츠 항목의 스크롤 위치를 유지할 수 있음
-    scrollBehavior (to, from, savedPosition) {
-        console.log(savedPosition) // 이전에 컴포넌트에 위치했었던 스크롤 위치 객체를 반환
-
-/*        if (savedPosition) { // savedPosition은 히스토리 모드(뒤로가기, 앞으로가기)에서만 작동
-            console.log(savedPosition)
-            return savedPosition
-        }*/
+/*    scrollBehavior (to, from, savedPosition) {
+        console.log('savedPosition: ',savedPosition) // 이전에 컴포넌트에 위치했었던 스크롤 위치 객체를 반환
+        // savedPosition은 히스토리 모드(뒤로가기, 앞으로가기)에서만 작동
+        if (savedPosition) {
+            return savedPosition //history mode에서는 이전위치로 위치
+        }
 
         // 사용자 정의
-        /*       if (to.meta.scrollTo) {
-                   return{ x: 0, y: to.meta.scrollTo }
-               }*/
-
-        // scrollBehavior에서 hash가 있는 지 확인후 있다면 그 위치로 이동시킨다.
-        /*        if (to.hash) {
-                    return {
-                        selector: to.hash,
-                        //behavior: 'smooth'
-                        //offset: { y: 200 }
-                    };
-                }*/
-        return {x: 0, y: 0};
-    }
+/!*           if (to.meta.scrollTo) {
+               return{
+                   x: 0,
+                   y: to.meta.scrollTo,
+                   //behavior: 'smooth'
+               }
+           }*!/
+        return {x: 0, y: 0}; //router로 이동할 때에는 맨위로 위치하게
+    }*/
 })
 
 // ** 전역가드
 // router 인스턴스에 아래와 같이 .beforeEach() API를 호출
-// to : 이동할 url 정보가 담긴 라우터 객체
-// from : 현재 url 정보가 담긴 라우터 객체
+// to : 이동한 url 정보가 담긴 라우터 객체
+// from : 이동전 url 정보가 담긴 라우터 객체
 // next : to에서 지정한 url로 이동하기 위해 꼭 호출해야 하는 함수
+/*
 router.beforeEach( (to, from, next) => {
+    console.log('to: ',to)
+    console.log('from: ',from)
+    next()
     if(to.meta.authRequired) {
         alert('로그인이 필요합니다.')
         next('/login')
@@ -200,5 +201,6 @@ router.beforeEach( (to, from, next) => {
         next();
     }
 })
+*/
 
 export default router
